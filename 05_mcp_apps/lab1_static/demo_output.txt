@@ -1,0 +1,12 @@
+========================================================================
+Part 5 / Lab 5.1 - MCP Apps static: a pre-built view for a tool result
+========================================================================
+tool coffee_dashboard  _meta.ui = {"resourceUri":"ui://coffee/dashboard.html","visibility":["model","app"]}
+tool restock_beans     _meta.ui = {"resourceUri":"ui://coffee/dashboard.html","visibility":["app"]}
+resources/read ui://coffee/dashboard.html: mimeType=text/html;profile=mcp-app, 20,249 bytes, _meta={"ui":{"csp":{"connectDomains":[],"resourceDomains":[]},"prefersBorder":true}}
+structuredContent keys (for the view): ['days', 'inventory', 'items', 'kpis', 'labels', 'revenue']
+content[0].text (for the model / UI-less hosts): Revenue $4,669.20 (+8.4%), cups 1297 (+5.1%), avg ticket $3.60, best day Fri.
+model calls the app-only tool -> {"error": "tool 'restock_beans' is not visible to the model"}
+screenshot: screenshot.png
+bridge messages: view:ui/initialize, host:result, view:ui/notifications/initialized, host:ui/notifications/tool-input, host:ui/notifications/tool-result, view:tools/call, host:result, view:tools/call, host:result, view:ui/message, host:result
+@modelcontextprotocol/ext-apps schemas: 8 messages checked, errors=[]

@@ -1,0 +1,19 @@
+========================================================================
+Part 6 / Lab 6.4 - harness mixed: the whole loop, with the human in it
+========================================================================
+run 'request': tools ['read_file', 'read_file', 'read_file', 'render_ui'], UI events ['STATE_SNAPSHOT']
+run 'restock_beans': tools ['place_order', 'update_ui'], UI events ['STATE_DELTA']
+    STATE_DELTA {"op":"replace","path":"/elements/note/props/text","value":"Beans on hand: 13.5 kg - order #1 placed (writt...
+run 'apply_price': tools ['update_ui'], UI events ['STATE_DELTA']
+    STATE_DELTA {"op":"replace","path":"/elements/m-ticket/props/value","value":"$4.20"}
+the conversation now has 19 messages; user turns: ["Show this week's dashboard, and add an intera", '[ui action] restock_beans {"kg": 10}', '[ui action] apply_price {"price": 4.2}']
+inventory.json in the agent's workspace: {'beans_kg': 13.5, 'reorder_point_kg': 5.0, 'milk_l': 22.0, 'orders': [{'id': 1, 'kg': 10.0}]}
+refused action: {"error": "action 'rm_rf' not allowed"}
+--- the terminal surface saw the same runs (last lines):
+  (UI on screen patched: /elements/note/props/text, /elements/restock/props/label)
+assistant: Ordered 10 kg; inventory.json now shows 13.5 kg.
+> [ui action] apply_price {"price": 4.2}
+  tool update_ui({"ops": [{"op": "replace", "path": "/elements/m-ticket/props/value", "...)
+  (UI on screen patched: /elements/m-ticket/props/value, /elements/m-ticket/props/delta)
+assistant: Updated the average-ticket KPI to the price you picked in the calculator.
+screenshot: screenshot.png

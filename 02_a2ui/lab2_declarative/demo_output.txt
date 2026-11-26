@@ -1,0 +1,18 @@
+========================================================================
+Part 2 / Lab 2.2 - A2UI declarative: the model writes the surface
+========================================================================
+system prompt (generated from the official basic catalog), first lines:
+  | You generate A2UI v1.0 messages, one JSON object per line (JSONL), no prose, no fences.
+  | Every message has "version": "1.0". Start with createSurface, then updateComponents, then updateData
+  | Components are a FLAT list; children are referenced by id; exactly one component has id "root".
+  | Bind values with {"@path": "/json/pointer"}; inside a List template use relative paths like {"@path"
+  | Text has variant "caption" or "body" only; write headings as Markdown ("## Title").
+attempt 1: INVALID
+   - message 2: component id='title' (Text) at variant: 'h2' is not one of ['caption', 'body']
+   - message 2: component id='item_name' (Text) at text: a data binding must be {"@path": "/..."} in A2UI v1.0 (not {"path"
+attempt 2: VALID
+streamed: createSurface, updateComponents(12), updateComponents(12), updateComponents(12), updateComponents(2), updateDataModel
+official renderer core (@a2ui/web_core): accepted
+action  -> {"kg":12,"note":"medium roast","express":true} <- {"surfaceId":"coffee_dashboard","path":"/order/status","value":"Order #1042 confirmed: 12 kg express, note:...
+screenshot: screenshot_partial.png
+screenshot: screenshot.png

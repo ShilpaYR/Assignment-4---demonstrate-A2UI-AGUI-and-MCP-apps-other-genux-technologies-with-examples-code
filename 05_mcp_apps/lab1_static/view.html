@@ -1,0 +1,45 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- genux:style -->
+  <!-- genux:bridge -->
+  <!-- genux:kit -->
+  <style>body { padding: 10px; background: #fff; } .bar { display: flex; gap: 8px; align-items: center; }</style>
+</head>
+<body>
+  <div id="app" class="g-skeleton">waiting for the tool result ...</div>
+  <script>
+    // STATIC view: the layout is fixed here; only the numbers come from the tool result.
+    const { h, components: C } = GenuxUI;
+    const app = new McpAppBridge({ name: "coffee-dashboard-view", version: "1.0.0" });
+    let data = null;
+
+    function render() {
+      const k = data.kpis, money = (x) => "$" + x.toLocaleString("en-US", { minimumFractionDigits: 2 });
+      document.getElementById("app").replaceWith(h("div", { id: "app" },
+        C.Card({ title: "Campus Coffee Cart", subtitle: `last ${data.days} days · pre-built MCP App view` }, [
+          C.Row({}, [C.Metric({ label: "Revenue", value: money(k.revenue), delta: k.revenue_delta }),
+                     C.Metric({ label: "Cups sold", value: k.cups.toLocaleString(), delta: k.cups_delta }),
+                     C.Metric({ label: "Avg ticket", value: money(k.avg_ticket) })]),
+          C.BarChart({ title: "Revenue by day (USD)", labels: data.labels, values: data.revenue }),
+          C.Table(data.items),
+          h("div", { class: "bar" },
+            h("button", { id: "days3", class: "secondary", onClick: () => refresh(3) }, "Last 3 days"),
+            h("button", { id: "restock", onClick: restock }, `Reorder 10 kg (beans: ${data.inventory.beans_kg} kg)`),
+            h("button", { id: "ask", class: "secondary", onClick: () => app.sendMessage("Why was Friday the best day?") }, "Ask about Friday")),
+        ])));
+    }
+    async function refresh(days) {            // the view calls the server tool again, through the host
+      const r = await app.callServerTool("coffee_dashboard", { days });
+      data = r.structuredContent; render();
+    }
+    async function restock() {                // an app-only tool: invisible to the model
+      const r = await app.callServerTool("restock_beans", { kg: 10 });
+      data.inventory = r.structuredContent.inventory; render();
+    }
+    app.ontoolresult = (r) => { data = r.structuredContent; render(); };
+    app.connect();
+  </script>
+</body>
+</html>

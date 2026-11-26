@@ -1,0 +1,48 @@
+<!doctype html>
+<html>
+<head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; img-src data:; font-src data:; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<style>
+  body { font: 14px/1.4 -apple-system, "Segoe UI", Roboto, sans-serif; margin: 0; padding: 12px; color: #1d1b16; }
+  h3 { margin: 0 0 8px; font-size: 15px; }
+  label { display: grid; grid-template-columns: 150px 1fr 70px; gap: 8px; align-items: center; margin: 6px 0; }
+  output { font-weight: 600; text-align: right; }
+  .result { margin-top: 10px; padding: 10px; border-radius: 8px; background: #f2e7dc; display: flex; gap: 18px; flex-wrap: wrap; }
+  .result b { font-size: 20px; display: block; }
+  .bar { height: 10px; background: #e3ded2; border-radius: 5px; margin-top: 8px; overflow: hidden; }
+  .bar > div { height: 100%; background: #2f7d4f; width: 0; transition: width .2s; }
+  button { margin-top: 10px; font: inherit; border: 0; border-radius: 6px; padding: 6px 12px; background: #7b4bb3; color: #fff; cursor: pointer; }
+</style>
+</head>
+<body>
+  <h3>Break-even calculator</h3>
+  <label>Price per cup <input id="price" type="range" min="2" max="7" step="0.05" value="3.60"><output id="priceOut"></output></label>
+  <label>Cost per cup <input id="cost" type="range" min="0.5" max="3" step="0.05" value="1.25"><output id="costOut"></output></label>
+  <label>Fixed weekly costs <input id="fixed" type="range" min="200" max="2000" step="10" value="900"><output id="fixedOut"></output></label>
+  <div class="result">
+    <div>Break-even cups / week<b id="cups">-</b></div>
+    <div>Profit at 1,297 cups<b id="profit">-</b></div>
+  </div>
+  <div class="bar" title="this week's cups vs break-even"><div id="progress"></div></div>
+  <button id="apply">Use this price</button>
+<script>
+  var SOLD = 1297;
+  function $(id) { return document.getElementById(id); }
+  function update() {
+    var p = +$("price").value, c = +$("cost").value, f = +$("fixed").value;
+    $("priceOut").textContent = "$" + p.toFixed(2);
+    $("costOut").textContent = "$" + c.toFixed(2);
+    $("fixedOut").textContent = "$" + f.toFixed(0);
+    var margin = p - c;
+    var cups = margin > 0 ? Math.ceil(f / margin) : Infinity;
+    $("cups").textContent = isFinite(cups) ? cups.toLocaleString() : "never";
+    $("profit").textContent = "$" + (SOLD * margin - f).toFixed(0);
+    $("progress").style.width = isFinite(cups) ? Math.min(100, 100 * SOLD / cups) + "%" : "0%";
+  }
+  ["price", "cost", "fixed"].forEach(function (id) { $(id).addEventListener("input", update); });
+  $("apply").addEventListener("click", function () {
+    genux.emit("apply_price", { price: +$("price").value, breakEvenCups: $("cups").textContent });
+  });
+  update();
+</script>
+</body>
+</html>

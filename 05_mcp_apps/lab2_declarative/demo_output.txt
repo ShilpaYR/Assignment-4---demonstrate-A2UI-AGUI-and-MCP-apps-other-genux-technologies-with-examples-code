@@ -1,0 +1,9 @@
+========================================================================
+Part 5 / Lab 5.2 - MCP Apps declarative: the view renders a catalog spec
+========================================================================
+content[0].text: Showing a 10-element dashboard (BarChart, Button, Card, Metric, Row, Table, Text).
+structuredContent.spec: dash:Card, kpis:Row, m-rev:Metric, m-cups:Metric, m-ticket:Metric, chart:BarChart, items:Table, actions:Row, note:Text, restock:Button
+app-only ui_action from the model -> {"error": "tool 'ui_action' is not visible to the model"}
+app-only ui_action from the app   -> {"ops":[{"op":"replace","path":"/elements/note/props/text","value":"Beans on hand: 13.5 kg - 10 kg ordered."}]}
+screenshot: screenshot.png
+@modelcontextprotocol/ext-apps schemas: 6 bridge messages checked, errors=[]

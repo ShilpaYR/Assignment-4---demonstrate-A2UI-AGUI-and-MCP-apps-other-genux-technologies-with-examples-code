@@ -1,0 +1,33 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- genux:style -->
+  <!-- genux:bridge -->
+  <!-- genux:kit -->
+  <style>body { padding: 10px; background: #fff; }</style>
+</head>
+<body>
+  <div id="app" class="g-skeleton">waiting for the tool result ...</div>
+  <script>
+    // DECLARATIVE view: a generic catalog renderer. The layout comes from structuredContent.spec.
+    const { renderSpec, applyPatch } = GenuxUI;
+    const app = new McpAppBridge({ name: "coffee-catalog-view", version: "1.0.0" });
+    let spec = null;
+    const ctx = {
+      onAction: async (action, params) => {               // Button -> app-only server tool -> JSON Patch
+        const r = await app.callServerTool("ui_action", { action, params });
+        spec = applyPatch(spec, r.structuredContent.ops);
+        paint();
+      },
+    };
+    function paint() { document.getElementById("app").replaceWith(Object.assign(renderSpec(spec, ctx), { id: "app" })); }
+    app.ontoolresult = (r) => {
+      if (r.isError) { document.getElementById("app").textContent = r.content[0].text; return; }
+      spec = r.structuredContent.spec;
+      paint();
+    };
+    app.connect();
+  </script>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{
+  "name": "genux-assignment4",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generative UI codelabs: AG-UI, A2UI, json-render, OpenUI Lang, MCP Apps and harness integration - static, declarative, open-ended and mixed modes.",
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run build:json-render && npm run build:openui && npm run build:mcp-view-kit",
+    "build:json-render": "node 03_json_render/shared/build.mjs",
+    "build:openui": "node 04_openui/shared/build.mjs",
+    "build:mcp-view-kit": "esbuild 05_mcp_apps/shared/view-kit-entry.js --bundle --format=iife --global-name=GenuxUI --outfile=05_mcp_apps/shared/view-kit.js"
+  },
+  "dependencies": {
+    "@a2ui/web_core": "0.16.1",
+    "@json-render/core": "0.23.2",
+    "@json-render/react": "0.23.2",
+    "@modelcontextprotocol/ext-apps": "2.0.4",
+    "@openuidev/lang-core": "1.2.0",
+    "gpt-tokenizer": "4.1.2",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
+    "zod": "4.6.7"
+  },
+  "devDependencies": {
+    "esbuild": "0.28.2"
+  }
+}

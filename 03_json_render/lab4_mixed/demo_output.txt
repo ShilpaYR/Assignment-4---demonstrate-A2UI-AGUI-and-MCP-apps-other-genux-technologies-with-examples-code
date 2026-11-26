@@ -1,0 +1,33 @@
+========================================================================
+Part 3 / Lab 3.4 - json-render mixed: hybrid catalog, one spec, two renderers
+========================================================================
+17 patches: 12 elements (BarChart, Button, Card, HtmlBlock, Metric, Row, Table, Text) + 4 state patches
+official compileSpecStream + hybridCatalog props: valid
+action restock_beans {'kg': 10} -> [{"op":"replace","path":"/state/inventory/beans_kg","value":13.5},{"op":"replace","path":"/state/inventory/label","va...
+action apply_price {'price': 4.25} -> [{"op":"replace","path":"/state/kpis/ticket","value":"$4.25"},{"op":"replace","path":"/state/whatif/status","value":"...
+action apply_price {'price': 400} -> [{"error":"refused action 'apply_price' with {'price': 400}"}]
+--- the same spec, second renderer (rich, terminal):
+╭───────────────────────────────── Campus Coffee Cart - this week ─────────────────────────────────╮
+│ ┌─────── Revenue ────────┐       ┌────── Cups sold ───────┐       ┌────── Avg ticket ──────┐     │
+│ │ $4,669.20  +8.4%       │       │ 1,297  +5.1%           │       │ $4.25                  │     │
+│ └────────────────────────┘       └────────────────────────┘       └────────────────────────┘     │
+│ ╔════════════════════════════ What-if price calculator (HtmlBlock) ════════════════════════════╗ │
+│ ║ interactive HTML (2582 chars) - open the web view to use it                                  ║ │
+│ ║ Avg ticket set to $4.25 by the server.                                                       ║ │
+│ ╚══════════════════════════════════════════════════════════════════════════════════════════════╝ │
+│ ┌──────────────────────────────────── Revenue by day (USD) ────────────────────────────────────┐ │
+│ │  Mon ███████████████████          655                                                        │ │
+│ │  Tue ██████████████████████       738                                                        │ │
+│ │  Wed ████████████████████████     832                                                        │ │
+│ │  Thu █████████████████████        713                                                        │ │
+│ │  Fri ████████████████████████████ 950                                                        │ │
+│ │  Sat █████████████                436                                                        │ │
+│ │  Sun ██████████                   346                                                        │ │
+   ...
+│   Cold brew   318    $1,240.20                                                                   │
+│   Espresso    236    $637.20                                                                     │
+│   Chai        141    $542.10                                                                     │
+│                                                                                                  │
+│ Beans on hand: 13.5 kg - order placed.                    [ Reorder 10 kg of beans ]             │
+╰───────────────────────────────────── Mon-Sun, all locations ─────────────────────────────────────╯
+screenshot: screenshot.png

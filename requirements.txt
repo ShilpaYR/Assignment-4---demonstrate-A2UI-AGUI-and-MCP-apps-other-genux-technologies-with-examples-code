@@ -1,0 +1,10 @@
+# Python 3.10+ (tested with 3.13). Install:  python -m pip install -r requirements.txt
+ag-ui-protocol==1.0.0      # AG-UI event models + SSE encoder (Parts 1 and 6)
+mcp==2.3.0                 # official MCP Python SDK v2: MCPServer + Client (Part 5)
+jsonschema==4.26.0         # A2UI / json-render / tool-argument validation
+referencing==0.37.0
+rich==15.0.0               # terminal renderers (Parts 3 and 6)
+pytest==9.1.1              # offline tests
+playwright==1.63.0         # demo screenshots (then: python -m playwright install chromium)
+openai==3.59.0             # only for live mode (GENUX_LIVE=1)
+tiktoken==0.14.0           # optional; token counts fall back to gpt-tokenizer (npm) or an estimate

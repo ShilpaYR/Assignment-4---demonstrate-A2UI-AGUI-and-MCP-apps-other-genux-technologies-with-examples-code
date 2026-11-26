@@ -1,0 +1,200 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "Stack": {
+      "$ref": "#/$defs/Stack"
+    },
+    "Card": {
+      "$ref": "#/$defs/Card"
+    },
+    "Row": {
+      "$ref": "#/$defs/Row"
+    },
+    "Text": {
+      "$ref": "#/$defs/Text"
+    },
+    "Metric": {
+      "$ref": "#/$defs/Metric"
+    },
+    "BarChart": {
+      "$ref": "#/$defs/BarChart"
+    },
+    "Table": {
+      "$ref": "#/$defs/Table"
+    },
+    "Button": {
+      "$ref": "#/$defs/Button"
+    }
+  },
+  "required": [
+    "Stack",
+    "Card",
+    "Row",
+    "Text",
+    "Metric",
+    "BarChart",
+    "Table",
+    "Button"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Stack": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false,
+      "description": "Root container: stacks its children vertically."
+    },
+    "Card": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "children": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "title",
+        "children"
+      ],
+      "additionalProperties": false,
+      "description": "A titled container."
+    },
+    "Row": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false,
+      "description": "Lays its children out side by side."
+    },
+    "Text": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "tone": {
+          "type": "string",
+          "enum": [
+            "normal",
+            "muted",
+            "strong"
+          ]
+        }
+      },
+      "required": [
+        "text"
+      ],
+      "additionalProperties": false,
+      "description": "A paragraph. tone: normal | muted | strong."
+    },
+    "Metric": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "delta": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "value"
+      ],
+      "additionalProperties": false,
+      "description": "One key number with a label and an optional change such as '+8%'."
+    },
+    "BarChart": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "labels",
+        "values"
+      ],
+      "additionalProperties": false,
+      "description": "A bar chart; labels and values have the same length."
+    },
+    "Table": {
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ],
+      "additionalProperties": false,
+      "description": "A table; every row has one cell per column."
+    },
+    "Button": {
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "action": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label",
+        "action"
+      ],
+      "additionalProperties": false,
+      "description": "A button; action is the name of an app action (restock_beans)."
+    }
+  }
+}

@@ -1,0 +1,21 @@
+========================================================================
+Part 1 / Lab 2 - AG-UI, declarative mode: the UI is shared state
+========================================================================
+system prompt (generated from the catalog), first lines:
+  | You build user interfaces from a fixed component catalog.
+  | Reply with ONE JSON object: {"root": "<id>", "elements": {"<id>": {"type", "props", "children"}}
+  | children is a list of element ids (an empty list when none). Use only these components:
+  | - Card(title: string, subtitle?: string) - A titled container. Children go inside.
+  | - Row() - Lays children out side by side.
+  | - Column() - Stacks children vertically.
+POST /agui -> 20 events
+  {"type":"STEP_STARTED","stepName":"generate"}
+  {"type":"STEP_STARTED","stepName":"validate"}
+  {"type":"STEP_STARTED","stepName":"publish"}
+  {"type":"STATE_SNAPSHOT","snapshot":{"ui":{"root":null,"elements":{}}}}
+  {"type":"STATE_DELTA","delta":[{"op":"add","path":"/ui/root","value":"dash"}]}
+  {"type":"STATE_DELTA","delta":[{"op":"add","path":"/ui/elements/dash","value":{"type":"Card","props":{"title":"Campus...
+  {"type":"STATE_DELTA","delta":[{"op":"add","path":"/ui/elements/kpis","value":{"type":"Row","props":{},"children":["m...
+8 STATE_DELTA events rebuilt state.ui with 7 elements: dash:Card, kpis:Row, m-rev:Metric, m-cups:Metric, m-ticket:Metric, chart:BarChart, items:Table
+screenshot: screenshot_partial.png
+screenshot: screenshot.png

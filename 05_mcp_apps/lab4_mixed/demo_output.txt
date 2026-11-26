@@ -1,0 +1,17 @@
+========================================================================
+Part 5 / Lab 5.4 - MCP Apps mixed: catalog + generated region, two hosts
+========================================================================
+[text host] tools offered to the model: coffee_dashboard_hybrid
+[text host] coffee_dashboard_hybrid -> (UI resource ignored, showing content[])
+    Campus Coffee Cart - this week
+    Revenue $4,669.20 (+8.4%), cups 1297 (+5.1%), avg ticket $3.60, best day Fri.
+    Top items: Oat latte 402, Cold brew 318, Espresso 236, Chai 141.
+    Beans on hand 3.5 kg (reorder point 5.0 kg).
+    (Interactive what-if price calculator available in UI-capable hosts.)
+[web host] model -> apply_price(4.0): tool 'apply_price' is not visible to the model
+[web host]   app -> apply_price(40): price 40.0 is outside 2-7 USD
+[web host] after both tool calls the nested calculator still shows $4.05
+[web host] model context updated by the app: "The user set the list price to $4.05 in the what-if calculator."
+screenshot: screenshot.png
+[web host] view -> host tools/call: ['apply_price', 'restock_beans']
+@modelcontextprotocol/ext-apps schemas: 9 bridge messages checked, errors=[]

@@ -1,0 +1,11 @@
+========================================================================
+Part 2 / Lab 2.3 - A2UI open-ended: one HtmlFrame from a custom catalog
+========================================================================
+createSurface catalogId: https://catalogs.genux.example/html/v1/catalog.json
+component: {"id":"root","component":"HtmlFrame","title":"Break-even calculator","html":"<2581 chars of HTML>","caption":{"@path":"/status"},"allowedEvents":["apply_pric...
+validate against basic catalog only : component id='root': unknown component 'HtmlFrame'; allowed: Text, Image, Icon, Video, Aud
+validate with the custom catalog    : valid
+official renderer core (@a2ui/web_core) + custom catalog: accepted
+browser: iframe event -> 2. iframe -> renderer: apply_price {"price":4.5,"breakEvenCups":"277"}
+         A2UI action  -> 3. action -> {"version":"1.0","action":{"name":"apply_price","surfaceId":"break_even","sourceComponentId":"roo
+screenshot: screenshot.png

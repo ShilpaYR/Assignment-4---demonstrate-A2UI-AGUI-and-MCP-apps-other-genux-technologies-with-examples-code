@@ -1,0 +1,12 @@
+========================================================================
+Part 4 / Lab 4.3 - OpenUI Lang open-ended: HtmlArtifact only
+========================================================================
+library components: ['HtmlArtifact', 'Stack']
+  root = Stack([calc])
+  calc = HtmlArtifact("Break-even calculator", "<!doctype html>\n<html>\n<head>\n<style>\n  body { ...
+official parser on the first half: HtmlArtifact partial=True, document so far 1280 chars
+server summary: {"done":true,"errors":[],"statements":2,"tokens":971,"artifact_tokens":873,"token_method":"o200k_base via gpt-tokenizer"}
+event apply_price {'price': 4.6} -> {'message': 'Server stored list price $4.60.'}
+event apply_price {'price': '<script>'} -> {'error': "refused 'apply_price' with {'price': '<script>'}"}
+screenshot: screenshot_partial.png
+screenshot: screenshot.png

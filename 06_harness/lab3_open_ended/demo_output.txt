@@ -1,0 +1,18 @@
+========================================================================
+Part 6 / Lab 6.3 - harness open-ended: the agent writes the UI with render_html
+========================================================================
+--- surface 1: terminal
+> Build an interactive break-even calculator for the coffee cart: sliders for price per cup, 
+cost per cup and fixed weekly costs.
+  tool read_file({"path": "sales_week.csv"})
+assistant: No catalog component can do this, so I'll write a small HTML calculator.
+  tool render_html({"title": "Break-even calculator", "html": "<!doctype html>\n<html>\n<...)
+╔════════════════════════════════════════ render_html ═════════════════════════════════════════╗
+║ Break-even calculator: saved to artifacts/break-even-calculator.html (873 tokens)            ║
+║ open it in a browser, or use the web surface (--web)                                         ║
+╚══════════════════════════════════════════════════════════════════════════════════════════════╝
+assistant: The calculator is open in the web surface and saved as an artifact.
+artifact starts with: <head><meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsaf ...
+policy check of a bad document: render_html rejected the document: external <script src> is not allowed; remote resources are not allowed
+--- surface 2: AG-UI ACTIVITY_SNAPSHOT: {"title":"Break-even calculator","tokens":873}
+screenshot: screenshot.png

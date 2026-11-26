@@ -1,0 +1,10 @@
+========================================================================
+Part 3 / Lab 3.3 - json-render open-ended: a catalog with only HtmlBlock
+========================================================================
+  add /root              "widget"
+  add /elements/widget   {"type":"HtmlBlock","props":{"title":"Break-even calculator","html":"<2582 chars>","caption":{"$state":"/status"}},"c...
+  add /state/status      "Model-written widget. Waiting for a price."
+the HtmlBlock document is 873 tokens (o200k_base via gpt-tokenizer)
+official compileSpecStream + htmlCatalog props: valid
+bad event -> [{"op":"replace","path":"/state/status","value":"Ignored an invalid event from the HtmlBlock."}]
+screenshot: screenshot.png

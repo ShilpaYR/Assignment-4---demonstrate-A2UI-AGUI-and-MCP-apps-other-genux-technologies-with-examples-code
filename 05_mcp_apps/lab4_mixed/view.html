@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- genux:style -->
+  <!-- genux:bridge -->
+  <!-- genux:kit -->
+  <style>body { padding: 10px; background: #fff; }</style>
+</head>
+<body>
+  <div id="app" class="g-skeleton">waiting for the tool result ...</div>
+  <script>
+    // MIXED view: catalog renderer + one nested sandbox for the GeneratedView.
+    const { renderSpec, applyPatch } = GenuxUI;
+    const app = new McpAppBridge({ name: "coffee-hybrid-view", version: "1.0.0" });
+    let spec = null;
+    const ctx = {
+      allowedEvents: ["apply_price"],
+      onAction: (action, params) => call("restock_beans", { kg: params.kg ?? 10 }),     // catalog Button
+      onGeneratedEvent: (name, payload) => {                                            // generated region
+        if (name !== "apply_price") return;
+        call("apply_price", { price: payload.price });
+        app.updateModelContext(`The user set the list price to $${Number(payload.price).toFixed(2)} in the what-if calculator.`);
+      },
+    };
+    async function call(tool, args) {                    // app-only tools, through the host
+      const r = await app.callServerTool(tool, args);
+      if (r.isError) return;
+      spec = applyPatch(spec, r.structuredContent.ops);
+      // re-render only the patched elements, so the nested calculator keeps its state
+      for (const id of new Set(r.structuredContent.ops.map((op) => op.path.split("/")[2]))) {
+        document.querySelector(`[data-id="${id}"]`)?.replaceWith(renderSpec({ root: id, elements: spec.elements }, ctx));
+      }
+    }
+    app.ontoolresult = (r) => {
+      if (r.isError) { document.getElementById("app").textContent = r.content[0].text; return; }
+      spec = r.structuredContent.spec;
+      document.getElementById("app").replaceWith(Object.assign(renderSpec(spec, ctx), { id: "app" }));
+    };
+    app.connect();
+  </script>
+</body>
+</html>

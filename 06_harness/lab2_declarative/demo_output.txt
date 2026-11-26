@@ -1,0 +1,21 @@
+========================================================================
+Part 6 / Lab 6.2 - harness declarative: render_ui validated, the loop self-corrects
+========================================================================
+--- surface 1: terminal
+> Show this week's sales dashboard for the Campus Coffee Cart.
+  tool read_file({"path": "sales_week.csv"})
+  tool read_file({"path": "top_items.csv"})
+  tool read_file({"path": "inventory.json"})
+  tool render_ui({"spec": {"root": "dash", "elements": {"dash": {"type": "Card", "props...)
+  ! render_ui failed: {"error": "render_ui rejected the spec: chart: BarChart labels and values 
+differ in length; pie: unknown component 'PieChart'; allowed: Card, Row, Col
+assistant: The catalog has no PieChart and the chart needs 7 values; fixing the layout.
+  tool render_ui({"spec": {"root": "dash", "elements": {"dash": {"type": "Card", "props...)
+   ... (the dashboard, drawn with rich) ...
+assistant: Dashboard rendered from the catalog after one correction.
+tool result the model received after attempt 1:
+    render_ui rejected the spec: chart: BarChart labels and values differ in length
+    pie: unknown component 'PieChart'
+    allowed: Card, Row, Column, Text, Metric, BarChart, Table, Button
+--- surface 2: AG-UI: ['read_file', 'read_file', 'read_file', 'render_ui', 'render_ui'] -> 1 STATE_SNAPSHOT (only the valid spec reaches the page)
+screenshot: screenshot.png

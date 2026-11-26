@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "Stack": {
+      "$ref": "#/$defs/Stack"
+    },
+    "HtmlArtifact": {
+      "$ref": "#/$defs/HtmlArtifact"
+    }
+  },
+  "required": [
+    "Stack",
+    "HtmlArtifact"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Stack": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false,
+      "description": "Root container: stacks its children vertically."
+    },
+    "HtmlArtifact": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "document": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "title",
+        "document"
+      ],
+      "additionalProperties": false,
+      "description": "A complete, self-contained HTML document (inline CSS/JS, no network) shown in a sandbox. Use ONLY when the user asks for something interactive the other components cannot express. Inside it, genux.emit(name, payload) sends an event."
+    }
+  }
+}

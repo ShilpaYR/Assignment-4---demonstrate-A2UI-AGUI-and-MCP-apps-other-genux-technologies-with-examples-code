@@ -1,0 +1,253 @@
+{
+  "spec": {
+    "type": "object",
+    "properties": {
+      "root": {
+        "type": "string"
+      },
+      "elements": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "enum": [
+                "Card",
+                "Row",
+                "Column",
+                "Text",
+                "Metric",
+                "BarChart",
+                "Table",
+                "Button",
+                "HtmlBlock"
+              ]
+            },
+            "props": {
+              "type": "object",
+              "additionalProperties": {}
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "slots": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "visible": {},
+            "repeat": {}
+          },
+          "required": [
+            "type",
+            "props",
+            "children"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "root",
+      "elements"
+    ],
+    "additionalProperties": false
+  },
+  "props": {
+    "Card": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "subtitle": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "subtitle"
+      ],
+      "additionalProperties": false
+    },
+    "Row": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "Column": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {},
+      "additionalProperties": false
+    },
+    "Text": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string"
+        },
+        "tone": {
+          "anyOf": [
+            {
+              "type": "string",
+              "enum": [
+                "normal",
+                "muted",
+                "strong"
+              ]
+            },
+            {
+              "type": "null"
+            }
+          ]
+        }
+      },
+      "required": [
+        "text",
+        "tone"
+      ],
+      "additionalProperties": false
+    },
+    "Metric": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "delta": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "label",
+        "value",
+        "delta"
+      ],
+      "additionalProperties": false
+    },
+    "BarChart": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "labels": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        }
+      },
+      "required": [
+        "title",
+        "labels",
+        "values"
+      ],
+      "additionalProperties": false
+    },
+    "Table": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "columns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "rows": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "columns",
+        "rows"
+      ],
+      "additionalProperties": false
+    },
+    "Button": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "label"
+      ],
+      "additionalProperties": false
+    },
+    "HtmlBlock": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "html": {
+          "type": "string"
+        },
+        "caption": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "html",
+        "caption"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "actions": [
+    "restock_beans",
+    "apply_price"
+  ],
+  "builtinActions": [
+    "setState",
+    "pushState",
+    "removeState",
+    "validateForm"
+  ]
+}

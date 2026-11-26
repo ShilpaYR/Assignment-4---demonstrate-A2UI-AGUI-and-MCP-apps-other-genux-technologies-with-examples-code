@@ -1,0 +1,25 @@
+========================================================================
+Part 3 / Lab 3.2 - json-render declarative: SpecStream patches, validated as they stream
+========================================================================
+system prompt = catalog.prompt() from @json-render/core: 16,648 chars; components section:
+  | - Card: { title: string, subtitle?: string } - A titled container; children go inside.
+  | - Row: {  } - Lays its children out side by side.
+  | - Column: {  } - Stacks its children vertically.
+  | - Text: { text: string, tone?: "normal" | "muted" | "strong" } - One paragraph of text.
+  accepted add /root
+  accepted add /elements/dash
+  accepted add /elements/kpis
+  accepted add /elements/m-rev
+  accepted add /elements/m-cups
+  accepted add /elements/m-ticket
+  REJECTED /elements/pie: pie: unknown component 'PieChart'; allowed: Card, Row, Column, Text, Metric, BarChart, Table, Button
+  accepted add /elements/chart
+  accepted add /elements/items
+  accepted add /elements/stock
+  accepted add /elements/beans
+  accepted add /elements/restock
+summary: {"elements":10,"rejected":["/elements/pie"],"issues":[],"server_first_element_ms":87.3,"server_total_ms":321.3}
+official compileSpecStream on the RAW model output : ['pie: unknown component PieChart; allowed: Card, Row, Column, Text, Metric, BarChart, Table, Button']
+official compileSpecStream on the ACCEPTED patches: valid | same spec as Python: True
+browser: first element painted after 59 ms · complete after 284 ms · 10 elements · 1 line(s) rejected
+screenshot: screenshot.png

@@ -1,0 +1,116 @@
+[
+  {
+    "content": "I'll look at the workspace first.",
+    "tool_calls": [
+      {
+        "name": "list_files",
+        "arguments": {}
+      }
+    ]
+  },
+  {
+    "content": null,
+    "tool_calls": [
+      {
+        "name": "read_file",
+        "arguments": {
+          "path": "sales_week.csv"
+        }
+      },
+      {
+        "name": "read_file",
+        "arguments": {
+          "path": "top_items.csv"
+        }
+      }
+    ]
+  },
+  {
+    "content": null,
+    "tool_calls": [
+      {
+        "name": "show_metric",
+        "arguments": {
+          "label": "Revenue",
+          "value": "$4,669.20",
+          "delta": "+8.4%"
+        }
+      },
+      {
+        "name": "show_metric",
+        "arguments": {
+          "label": "Cups sold",
+          "value": "1,297",
+          "delta": "+5.1%"
+        }
+      },
+      {
+        "name": "show_metric",
+        "arguments": {
+          "label": "Avg ticket",
+          "value": "$3.60"
+        }
+      },
+      {
+        "name": "show_chart",
+        "arguments": {
+          "title": "Revenue by day (USD)",
+          "labels": [
+            "Mon",
+            "Tue",
+            "Wed",
+            "Thu",
+            "Fri",
+            "Sat",
+            "Sun"
+          ],
+          "values": [
+            655.2,
+            738.0,
+            831.6,
+            712.8,
+            950.4,
+            435.6,
+            345.6
+          ]
+        }
+      },
+      {
+        "name": "show_table",
+        "arguments": {
+          "columns": [
+            "Item",
+            "Cups",
+            "Revenue"
+          ],
+          "rows": [
+            [
+              "Oat latte",
+              "402",
+              "$1,849.20"
+            ],
+            [
+              "Cold brew",
+              "318",
+              "$1,240.20"
+            ],
+            [
+              "Espresso",
+              "236",
+              "$637.20"
+            ],
+            [
+              "Chai",
+              "141",
+              "$542.10"
+            ]
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "content": "Revenue was $4,669.20 this week; Friday was the best day.",
+    "tool_calls": []
+  }
+]

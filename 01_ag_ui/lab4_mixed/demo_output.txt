@@ -1,0 +1,13 @@
+========================================================================
+Part 1 / Lab 4 - AG-UI, mixed mode: catalog + sandboxed region + human in the loop
+========================================================================
+run 1 (request)      -> ['RUN_STARTED', 'STATE_SNAPSHOT', 'TEXT_MESSAGE_START', 'TEXT_MESSAGE_CONTENT', 'TEXT_MESSAGE_END', 'RUN_FINISHED']
+   state.ui elements: dash:Card, kpis:Row, m-rev:Metric, m-cups:Metric, m-ticket:Metric, chart:BarChart, items:Table, actions:Row, note:Text, restock:Button, whatif:GeneratedView
+run 2 (Button action)-> ['RUN_STARTED', 'TOOL_CALL_START', 'TOOL_CALL_ARGS', 'TOOL_CALL_END', 'RUN_FINISHED']
+   agent calls the PAGE's tool confirm_restock({'kg': 10, 'cost_usd': 180.0})
+run 3 (tool result)  -> {"type":"STATE_DELTA","delta":[{"op":"replace","path":"/inventory/beans_kg","value":13.5},{"op":"replace","path":"/ui/elements/note/props...
+run 4 (sandbox event)-> {"type":"STATE_DELTA","delta":[{"op":"replace","path":"/ui/elements/m-ticket/props/value","value":"$3.95"},{"op":"add","path":"/ui/elemen...
+run 5 (unknown action)-> {"type":"RUN_ERROR","message":"action 'delete_database' is not allowed","code":"BAD_ACTION"}
+screenshot: screenshot.png
+screenshot: screenshot_confirm.png
+screenshot: screenshot_after_actions.png

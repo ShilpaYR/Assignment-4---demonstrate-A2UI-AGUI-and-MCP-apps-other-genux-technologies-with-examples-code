@@ -1,0 +1,12 @@
+{"op":"add","path":"/root","value":"dash"}
+{"op":"add","path":"/elements/dash","value":{"type":"Card","props":{"title":"Campus Coffee Cart - this week","subtitle":"Mon-Sun, all locations"},"children":["kpis","chart","items","stock"]}}
+{"op":"add","path":"/elements/kpis","value":{"type":"Row","props":{},"children":["m-rev","m-cups","m-ticket"]}}
+{"op":"add","path":"/elements/m-rev","value":{"type":"Metric","props":{"label":"Revenue","value":"$4,669.20","delta":"+8.4%"},"children":[]}}
+{"op":"add","path":"/elements/m-cups","value":{"type":"Metric","props":{"label":"Cups sold","value":"1,297","delta":"+5.1%"},"children":[]}}
+{"op":"add","path":"/elements/m-ticket","value":{"type":"Metric","props":{"label":"Avg ticket","value":"$3.60","delta":null},"children":[]}}
+{"op":"add","path":"/elements/pie","value":{"type":"PieChart","props":{"slices":[1,2]},"children":[]}}
+{"op":"add","path":"/elements/chart","value":{"type":"BarChart","props":{"title":"Revenue by day (USD)","labels":["Mon","Tue","Wed","Thu","Fri","Sat","Sun"],"values":[655.2,738.0,831.6,712.8,950.4,435.6,345.6]},"children":[]}}
+{"op":"add","path":"/elements/items","value":{"type":"Table","props":{"columns":["Item","Cups","Revenue"],"rows":[["Oat latte","402","$1,849.20"],["Cold brew","318","$1,240.20"],["Espresso","236","$637.20"],["Chai","141","$542.10"]]},"children":[]}}
+{"op":"add","path":"/elements/stock","value":{"type":"Row","props":{},"children":["beans","restock"]}}
+{"op":"add","path":"/elements/beans","value":{"type":"Text","props":{"text":"Beans on hand: 3.5 kg (reorder at 5.0 kg).","tone":"strong"},"children":[]}}
+{"op":"add","path":"/elements/restock","value":{"type":"Button","props":{"label":"Reorder 10 kg of beans"},"children":[],"on":{"press":{"action":"restock_beans","params":{"kg":10}}}}}

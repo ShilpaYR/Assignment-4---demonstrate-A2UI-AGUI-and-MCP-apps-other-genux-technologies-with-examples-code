@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://catalogs.genux.example/html/v1/catalog.json",
+  "protocolVersion": "1.0",
+  "title": "genux HTML catalog",
+  "description": "A custom A2UI catalog with one component: a sandboxed region of model-written HTML. It exists to show open-ended and mixed generation on top of A2UI. It is NOT part of the A2UI standard.",
+  "catalogId": "https://catalogs.genux.example/html/v1/catalog.json",
+  "instructions": "Use HtmlFrame only for something the basic catalog cannot express (an interactive calculator, a custom chart). The html must be one self-contained document with inline CSS/JS and no network access. Inside it, call genux.emit(name, payload) to send an event; the renderer turns it into an A2UI action whose sourceComponentId is the HtmlFrame id.",
+  "components": {
+    "HtmlFrame": {
+      "type": "object",
+      "description": "Renders model-written HTML inside a sandboxed iframe with a Content-Security-Policy. Events from the document become A2UI actions.",
+      "properties": {
+        "component": {"const": "HtmlFrame"},
+        "title": {"$ref": "common_types.json#/$defs/DynamicString", "description": "A short title shown above the frame."},
+        "html": {"type": "string", "description": "A complete, self-contained HTML document."},
+        "caption": {"$ref": "common_types.json#/$defs/DynamicString", "description": "Text under the frame; bind it to the data model to show agent feedback."},
+        "allowedEvents": {"type": "array", "items": {"type": "string"}, "description": "Event names the document may emit. Others are dropped by the renderer."}
+      },
+      "required": ["component", "html"]
+    }
+  },
+  "functions": {},
+  "$defs": {}
+}

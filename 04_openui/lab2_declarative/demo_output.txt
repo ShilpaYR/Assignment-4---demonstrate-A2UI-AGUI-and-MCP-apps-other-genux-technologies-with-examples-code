@@ -1,0 +1,26 @@
+========================================================================
+Part 4 / Lab 4.2 - OpenUI Lang declarative: primitives, forward references, streaming
+========================================================================
+program (the model's whole answer):
+  root = Stack([dash])
+  dash = Card("Campus Coffee Cart - this week", [kpis, chart, items, stock])
+  kpis = Row([rev, cups, ticket])
+  rev = Metric("Revenue", "$4,669.20", "+8.4%")
+  cups = Metric("Cups sold", "1,297", "+5.1%")
+  ticket = Metric("Avg ticket", "$3.60")
+  chart = BarChart("Revenue by day (USD)", ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [655.2, 7...
+  items = Table(["Item", "Cups", "Revenue"], [["Oat latte", "402", "$1,849.20"], ["Cold brew", "318", "...
+  stock = Row([beans, restock])
+  beans = Text("Beans on hand: 3.5 kg (reorder at 5 kg).", "strong")
+  restock = Button("Reorder 10 kg of beans", "restock_beans")
+after  2 lines:  2 elements rendered, unresolved forward refs = ['kpis', 'chart', 'items', 'stock']
+after  4 lines:  4 elements rendered, unresolved forward refs = ['cups', 'ticket', 'chart', 'items', 'stock']
+after  8 lines:  8 elements rendered, unresolved forward refs = ['stock']
+same dashboard, output size (o200k_base via gpt-tokenizer):
+  OpenUI Lang (this lab)             733 chars   275 tokens  1.00x
+  json-render spec (flat JSON)      1294 chars   413 tokens  1.50x
+  json-render SpecStream (JSONL)    1688 chars   527 tokens  1.92x
+  nested JSON tree                  1043 chars   333 tokens  1.21x
+action restock_beans -> edit: beans = Text("Beans on hand: 13.5 kg - 10 kg ordered.", "strong")
+screenshot: screenshot_partial.png
+screenshot: screenshot.png

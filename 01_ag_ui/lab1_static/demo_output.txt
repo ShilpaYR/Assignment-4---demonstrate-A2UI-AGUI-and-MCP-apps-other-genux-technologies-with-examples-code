@@ -1,0 +1,18 @@
+========================================================================
+Part 1 / Lab 1 - AG-UI, static mode: tool calls select pre-built components
+========================================================================
+POST /agui -> 30 AG-UI events over SSE
+  {"type":"RUN_STARTED","threadId":"demo","runId":"run_39001"}
+  {"type":"TEXT_MESSAGE_START","messageId":"msg_8e63229d","role":"assistant"}
+  {"type":"TEXT_MESSAGE_CONTENT","messageId":"msg_8e63229d","delta":"Revenue is up +8.4% this week; Friday wa...
+  {"type":"TEXT_MESSAGE_END","messageId":"msg_8e63229d"}
+  {"type":"TOOL_CALL_START","toolCallId":"call_29166414","toolCallName":"show_metric"}
+  {"type":"TOOL_CALL_ARGS","toolCallId":"call_29166414","delta":"{\"label\": \"Revenue\", \"value\": \"$4,669...
+  {"type":"TOOL_CALL_ARGS","toolCallId":"call_29166414","delta":"\", \"delta\": \"+8.4%\"}"}
+  {"type":"TOOL_CALL_END","toolCallId":"call_29166414"}
+  {"type":"TOOL_CALL_START","toolCallId":"call_f7df32ca","toolCallName":"show_metric"}
+  ...
+  {"type":"RUN_FINISHED","threadId":"demo","runId":"run_39001"}
+event counts: {'RUN_STARTED': 1, 'TEXT_MESSAGE_START': 1, 'TEXT_MESSAGE_CONTENT': 1, 'TEXT_MESSAGE_END': 1, 'TOOL_CALL_START': 5, 'TOOL_CALL_ARGS': 15, 'TOOL_CALL_END': 5, 'RUN_FINISHED': 1}
+components chosen by the agent: ['show_metric', 'show_metric', 'show_metric', 'show_chart', 'show_table']
+screenshot: screenshot.png

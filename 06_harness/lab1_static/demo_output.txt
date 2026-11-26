@@ -1,0 +1,24 @@
+========================================================================
+Part 6 / Lab 6.1 - harness static: UI tools next to file tools, two surfaces
+========================================================================
+--- surface 1: terminal
+> Show this week's sales dashboard for the Campus Coffee Cart.
+assistant: I'll look at the workspace first.
+  tool list_files({})
+  tool read_file({"path": "sales_week.csv"})
+  tool read_file({"path": "top_items.csv"})
+  tool show_metric({"label": "Revenue", "value": "$4,669.20", "delta": "+8.4%"})
+┌─────── Revenue ────────┐
+│ $4,669.20  +8.4%       │
+└────────────────────────┘
+  tool show_metric({"label": "Cups sold", "value": "1,297", "delta": "+5.1%"})
+┌────── Cups sold ───────┐
+│ 1,297  +5.1%           │
+└────────────────────────┘
+  tool show_metric({"label": "Avg ticket", "value": "$3.60"})
+   ... (chart and table panels) ...
+assistant: Revenue was $4,669.20 this week; Friday was the best day.
+--- surface 2: the same run bridged to AG-UI
+events: {'RUN_STARTED': 1, 'TEXT_MESSAGE_START': 2, 'TEXT_MESSAGE_CONTENT': 2, 'TEXT_MESSAGE_END': 2, 'TOOL_CALL_START': 8, 'TOOL_CALL_ARGS': 8, 'TOOL_CALL_END': 8, 'TOOL_CALL_RESULT': 8, 'RUN_FINISHED': 1}
+tool calls in order: ['list_files', 'read_file', 'read_file', 'show_metric', 'show_metric', 'show_metric', 'show_chart', 'show_table']
+screenshot: screenshot.png

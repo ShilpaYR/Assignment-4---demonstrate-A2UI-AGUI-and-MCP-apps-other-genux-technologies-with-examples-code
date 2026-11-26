@@ -1,0 +1,21 @@
+========================================================================
+Part 4 / Lab 4.4 - OpenUI Lang mixed: primitives + one HtmlArtifact, edits by statement
+========================================================================
+  root     = Stack([dash])
+  dash     = Card("Campus Coffee Cart - this week", [kpis, whatif, chart, items, stock])
+  kpis     = Row([rev, cups, ticket])
+  rev      = Metric("Revenue", "$4,669.20", "+8.4%")
+  cups     = Metric("Cups sold", "1,297", "+5.1%")
+  ticket   = Metric("Avg ticket", "$3.60")
+  whatif   = HtmlArtifact("What-if price calculator", "<!doctype html>\n<html>\n<head>\n<style>\n  bo...
+  chart    = BarChart("Revenue by day (USD)", ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"], [655...
+  items    = Table(["Item", "Cups", "Revenue"], [["Oat latte", "402", "$1,849.20"], ["Cold brew", "31...
+  stock    = Row([beans, restock])
+  beans    = Text("Beans on hand: 3.5 kg (reorder at 5 kg).", "strong")
+  restock  = Button("Reorder 10 kg of beans", "restock_beans")
+official parser + policy: errors=[] | 1245 tokens, HtmlArtifact 873 = 70% (o200k_base via gpt-tokenizer)
+event apply_price   -> {"patch":"ticket = Metric(\"Avg ticket\", \"$4.20\", \"new list price\")\n"}
+event restock_beans -> {"patch":"beans = Text(\"Beans on hand: 13.5 kg - 10 kg ordered.\", \"strong\")\n"}
+event apply_price   -> {"error":"refused 'apply_price' with {'price': 0}"}
+after both edits the artifact still shows price $4.20 (it was not re-mounted)
+screenshot: screenshot.png

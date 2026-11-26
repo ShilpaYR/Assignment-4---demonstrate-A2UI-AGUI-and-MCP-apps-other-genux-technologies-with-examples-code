@@ -1,0 +1,35 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <!-- genux:style -->
+  <!-- genux:bridge -->
+  <!-- genux:kit -->
+  <style>body { padding: 10px; background: #fff; }</style>
+</head>
+<body>
+  <div id="app" class="g-skeleton">waiting for the generated widget ...</div>
+  <div id="status" class="g-text muted"></div>
+  <script>
+    // OPEN-ENDED view: a frame around model-written HTML. The widget runs one sandbox deeper.
+    const { h, mountSandboxed } = GenuxUI;
+    const app = new McpAppBridge({ name: "widget-host-view", version: "1.0.0" });
+    app.ontoolresult = (r) => {
+      if (r.isError) { document.getElementById("app").textContent = r.content[0].text; return; }
+      const { title, html, allowedEvents } = r.structuredContent;
+      const box = h("div", { class: "g-generated", id: "app" }, h("div", { class: "gtitle" }, h("span", {}, title), h("span", {}, "nested sandbox")));
+      document.getElementById("app").replaceWith(box);
+      mountSandboxed(box, html, {
+        allowed: allowedEvents,
+        onEvent: async (name, payload) => {             // widget -> view: the view decides what goes to the host
+          if (name === "rejected") return;
+          const text = `The user picked a list price of $${Number(payload.price).toFixed(2)} (break-even at ${payload.breakEvenCups} cups/week).`;
+          await app.updateModelContext(text);
+          document.getElementById("status").textContent = "sent to the host as model context: " + text;
+        },
+      });
+    };
+    app.connect();
+  </script>
+</body>
+</html>

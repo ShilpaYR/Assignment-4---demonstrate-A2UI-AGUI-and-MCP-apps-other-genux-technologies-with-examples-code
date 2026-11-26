@@ -1,0 +1,103 @@
+{
+  "spec": {
+    "type": "object",
+    "properties": {
+      "root": {
+        "type": "string"
+      },
+      "elements": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "const": "HtmlBlock"
+            },
+            "props": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string"
+                },
+                "html": {
+                  "type": "string"
+                },
+                "caption": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "title",
+                "html"
+              ],
+              "additionalProperties": false
+            },
+            "children": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "slots": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "visible": {},
+            "repeat": {}
+          },
+          "required": [
+            "type",
+            "props",
+            "children"
+          ],
+          "additionalProperties": false
+        }
+      }
+    },
+    "required": [
+      "root",
+      "elements"
+    ],
+    "additionalProperties": false
+  },
+  "props": {
+    "HtmlBlock": {
+      "$schema": "https://json-schema.org/draft/2020-12/schema",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "html": {
+          "type": "string"
+        },
+        "caption": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
+      },
+      "required": [
+        "title",
+        "html",
+        "caption"
+      ],
+      "additionalProperties": false
+    }
+  },
+  "actions": [
+    "apply_price"
+  ],
+  "builtinActions": [
+    "setState",
+    "pushState",
+    "removeState",
+    "validateForm"
+  ]
+}

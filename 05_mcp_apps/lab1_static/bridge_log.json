@@ -1,0 +1,361 @@
+[
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 1,
+   "method": "ui/initialize",
+   "params": {
+    "appInfo": {
+     "name": "coffee-dashboard-view",
+     "version": "1.0.0"
+    },
+    "appCapabilities": {},
+    "protocolVersion": "2026-01-26"
+   }
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 1,
+   "result": {
+    "protocolVersion": "2026-01-26",
+    "hostInfo": {
+     "name": "genux-course-host",
+     "version": "1.0.0"
+    },
+    "hostCapabilities": {
+     "serverTools": {},
+     "updateModelContext": {
+      "text": {}
+     },
+     "message": {
+      "text": {}
+     }
+    },
+    "hostContext": {
+     "theme": "light",
+     "displayMode": "inline",
+     "toolInfo": {
+      "tool": {
+       "name": "coffee_dashboard",
+       "description": "Sales dashboard for the Campus Coffee Cart over the last `days` days (1-7).",
+       "inputSchema": {
+        "type": "object",
+        "properties": {
+         "days": {
+          "default": 7,
+          "title": "Days",
+          "type": "integer"
+         }
+        },
+        "title": "coffee_dashboardArguments"
+       },
+       "_meta": {
+        "ui": {
+         "resourceUri": "ui://coffee/dashboard.html",
+         "visibility": [
+          "model",
+          "app"
+         ]
+        }
+       }
+      }
+     },
+     "locale": "en-US"
+    }
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/initialized",
+   "params": {}
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/tool-input",
+   "params": {
+    "arguments": {
+     "days": 7
+    }
+   }
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/tool-result",
+   "params": {
+    "_meta": {
+     "io.modelcontextprotocol/serverInfo": {
+      "name": "coffee-cart-static",
+      "version": ""
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Campus Coffee Cart - this week\nRevenue $4,669.20 (+8.4%), cups 1297 (+5.1%), avg ticket $3.60, best day Fri.\nTop items: Oat latte 402, Cold brew 318, Espresso 236, Chai 141.\nBeans on hand 3.5 kg (reorder point 5.0 kg)."
+     }
+    ],
+    "structuredContent": {
+     "days": 7,
+     "kpis": {
+      "revenue": 4669.2,
+      "cups": 1297,
+      "avg_ticket": 3.6,
+      "best_day": "Fri",
+      "revenue_delta": "+8.4%",
+      "cups_delta": "+5.1%"
+     },
+     "labels": [
+      "Mon",
+      "Tue",
+      "Wed",
+      "Thu",
+      "Fri",
+      "Sat",
+      "Sun"
+     ],
+     "revenue": [
+      655.2,
+      738,
+      831.6,
+      712.8,
+      950.4,
+      435.6,
+      345.6
+     ],
+     "items": {
+      "columns": [
+       "Item",
+       "Cups",
+       "Revenue"
+      ],
+      "rows": [
+       [
+        "Oat latte",
+        "402",
+        "$1,849.20"
+       ],
+       [
+        "Cold brew",
+        "318",
+        "$1,240.20"
+       ],
+       [
+        "Espresso",
+        "236",
+        "$637.20"
+       ],
+       [
+        "Chai",
+        "141",
+        "$542.10"
+       ]
+      ]
+     },
+     "inventory": {
+      "beans_kg": 3.5,
+      "reorder_point_kg": 5,
+      "milk_l": 22
+     }
+    },
+    "isError": false,
+    "resultType": "complete"
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/size-changed",
+   "params": {
+    "width": 806,
+    "height": 650
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 2,
+   "method": "tools/call",
+   "params": {
+    "name": "restock_beans",
+    "arguments": {
+     "kg": 10
+    }
+   }
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 2,
+   "result": {
+    "_meta": {
+     "io.modelcontextprotocol/serverInfo": {
+      "name": "coffee-cart-static",
+      "version": ""
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Ordered 10 kg; beans on hand 13.5 kg."
+     }
+    ],
+    "structuredContent": {
+     "inventory": {
+      "beans_kg": 13.5,
+      "reorder_point_kg": 5,
+      "milk_l": 22
+     },
+     "ordered_kg": 10
+    },
+    "isError": false,
+    "resultType": "complete"
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 3,
+   "method": "tools/call",
+   "params": {
+    "name": "coffee_dashboard",
+    "arguments": {
+     "days": 3
+    }
+   }
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 3,
+   "result": {
+    "_meta": {
+     "io.modelcontextprotocol/serverInfo": {
+      "name": "coffee-cart-static",
+      "version": ""
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Campus Coffee Cart - this week\nRevenue $4,669.20 (+8.4%), cups 1297 (+5.1%), avg ticket $3.60, best day Fri.\nTop items: Oat latte 402, Cold brew 318, Espresso 236, Chai 141.\nBeans on hand 3.5 kg (reorder point 5.0 kg)."
+     }
+    ],
+    "structuredContent": {
+     "days": 3,
+     "kpis": {
+      "revenue": 1731.6,
+      "cups": 481,
+      "avg_ticket": 3.6,
+      "revenue_delta": null,
+      "cups_delta": null
+     },
+     "labels": [
+      "Fri",
+      "Sat",
+      "Sun"
+     ],
+     "revenue": [
+      950.4,
+      435.6,
+      345.6
+     ],
+     "items": {
+      "columns": [
+       "Item",
+       "Cups",
+       "Revenue"
+      ],
+      "rows": [
+       [
+        "Oat latte",
+        "402",
+        "$1,849.20"
+       ],
+       [
+        "Cold brew",
+        "318",
+        "$1,240.20"
+       ],
+       [
+        "Espresso",
+        "236",
+        "$637.20"
+       ],
+       [
+        "Chai",
+        "141",
+        "$542.10"
+       ]
+      ]
+     },
+     "inventory": {
+      "beans_kg": 13.5,
+      "reorder_point_kg": 5,
+      "milk_l": 22
+     }
+    },
+    "isError": false,
+    "resultType": "complete"
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/size-changed",
+   "params": {
+    "width": 806,
+    "height": 633
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 4,
+   "method": "ui/message",
+   "params": {
+    "role": "user",
+    "content": [
+     {
+      "type": "text",
+      "text": "Why was Friday the best day?"
+     }
+    ]
+   }
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 4,
+   "result": {}
+  }
+ }
+]

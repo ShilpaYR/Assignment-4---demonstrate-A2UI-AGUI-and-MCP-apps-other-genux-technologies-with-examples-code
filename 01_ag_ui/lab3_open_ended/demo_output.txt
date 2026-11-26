@@ -1,0 +1,12 @@
+========================================================================
+Part 1 / Lab 3 - AG-UI, open-ended mode: model-written HTML in a sandbox
+========================================================================
+POST /agui -> 98 events (93 TEXT_MESSAGE_CONTENT chunks of raw HTML)
+  {"type":"TEXT_MESSAGE_CONTENT","messageId":"msg_90b90ee5","delta":"<!doctype html>\n<html>\n<head"}
+  ACTIVITY_SNAPSHOT: {"status":"ready","problems":[],"title":"Break-even calculator","tokens":873,"token_method":"o200k_base via gpt-tokenizer","allowedEvents":["apply_price"]}
+output tokens (o200k_base via gpt-tokenizer):
+  static      (5 tool calls)          263
+  declarative (catalog JSON spec)     535
+  open-ended  (HTML document)         873   <- one widget, no data table
+clicked inside the sandbox -> page received: 7. iframe -> page: apply_price {"price":4.2,"breakEvenCups":"306"}
+screenshot: screenshot.png

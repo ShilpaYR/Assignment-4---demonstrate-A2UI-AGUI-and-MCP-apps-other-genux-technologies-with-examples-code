@@ -1,0 +1,44 @@
+[
+  {
+    "content": null,
+    "tool_calls": [
+      {
+        "name": "fill_dashboard",
+        "arguments": {
+          "kpis": {
+            "revenue": "$4,669.20",
+            "cups": "1,297",
+            "ticket": "$3.60"
+          },
+          "items": [
+            {
+              "name": "Oat latte",
+              "cups": 402,
+              "revenue": "$1,849.20"
+            },
+            {
+              "name": "Cold brew",
+              "cups": 318,
+              "revenue": "$1,240.20"
+            },
+            {
+              "name": "Espresso",
+              "cups": 236,
+              "revenue": "$637.20"
+            },
+            {
+              "name": "Chai",
+              "cups": 141,
+              "revenue": "$542.10"
+            }
+          ],
+          "inventory": {
+            "beans_kg": 3.5,
+            "reorder_kg": 5.0,
+            "status": ""
+          }
+        }
+      }
+    ]
+  }
+]

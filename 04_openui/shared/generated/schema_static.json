@@ -1,0 +1,107 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "properties": {
+    "Stack": {
+      "$ref": "#/$defs/Stack"
+    },
+    "SalesDashboard": {
+      "$ref": "#/$defs/SalesDashboard"
+    },
+    "InventoryCard": {
+      "$ref": "#/$defs/InventoryCard"
+    }
+  },
+  "required": [
+    "Stack",
+    "SalesDashboard",
+    "InventoryCard"
+  ],
+  "additionalProperties": false,
+  "$defs": {
+    "Stack": {
+      "type": "object",
+      "properties": {
+        "children": {
+          "type": "array",
+          "items": {}
+        }
+      },
+      "required": [
+        "children"
+      ],
+      "additionalProperties": false,
+      "description": "Root container: stacks its children vertically."
+    },
+    "SalesDashboard": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "revenue": {
+          "type": "string"
+        },
+        "revenueDelta": {
+          "type": "string"
+        },
+        "cups": {
+          "type": "string"
+        },
+        "avgTicket": {
+          "type": "string"
+        },
+        "days": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dailyRevenue": {
+          "type": "array",
+          "items": {
+            "type": "number"
+          }
+        },
+        "topItems": {
+          "type": "array",
+          "items": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "required": [
+        "title",
+        "revenue",
+        "revenueDelta",
+        "cups",
+        "avgTicket",
+        "days",
+        "dailyRevenue",
+        "topItems"
+      ],
+      "additionalProperties": false,
+      "description": "The complete pre-built weekly sales dashboard (KPIs, revenue chart, top items)."
+    },
+    "InventoryCard": {
+      "type": "object",
+      "properties": {
+        "beansKg": {
+          "type": "number"
+        },
+        "reorderKg": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "beansKg",
+        "reorderKg"
+      ],
+      "additionalProperties": false,
+      "description": "Pre-built stock card with a restock button."
+    }
+  }
+}

@@ -1,0 +1,11 @@
+========================================================================
+Part 5 / Lab 5.3 - MCP Apps open-ended: generated HTML, two sandboxes deep
+========================================================================
+content[0].text: Generated an interactive widget (873 tokens of HTML) for: break-even calculator
+structuredContent: title='Break-even calculator', html=2581 chars, allowedEvents=['apply_price']
+view resource _meta.ui.csp: {'connectDomains': [], 'resourceDomains': []} (no network for the view)
+nesting: host page > view iframe > widget iframe; frames on the page: 3
+host status: model context updated by the app: "The user picked a list price of $4.40 (break-even at 286 cups/week)."
+what the model will see next turn (host state): The user picked a list price of $4.40 (break-even at 286 cups/week).
+screenshot: screenshot.png
+@modelcontextprotocol/ext-apps schemas: 9 bridge messages checked, errors=[]

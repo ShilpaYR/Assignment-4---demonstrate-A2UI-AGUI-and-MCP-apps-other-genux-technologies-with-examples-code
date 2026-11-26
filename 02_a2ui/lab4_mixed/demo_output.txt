@@ -1,0 +1,17 @@
+========================================================================
+Part 2 / Lab 2.4 - A2UI mixed: basic catalog + one HtmlFrame on one surface
+========================================================================
+(surface default: basic): 31 components (Button, Card, Column, List, Row, Text)
+https://catalogs.genux.example/html/v1/catalog.json: 1 components (HtmlFrame)
+official renderer core (@a2ui/web_core): accepted
+action restock_beans -> updateDataModel, updateComponents
+      {"version":"1.0","updateDataModel":{"surfaceId":"coffee_dashboard","path":"/inventory/beans_kg","value":13.5}}
+      {"version":"1.0","updateComponents":{"surfaceId":"coffee_dashboard","components":[{"id":"stock_col","component":"...
+action apply_price   -> updateDataModel, updateDataModel
+      {"version":"1.0","updateDataModel":{"surfaceId":"coffee_dashboard","path":"/kpis/ticket","value":"$4.10"}}
+      {"version":"1.0","updateDataModel":{"surfaceId":"coffee_dashboard","path":"/whatif/status","value":"Avg ticket KP...
+action close_surface -> deleteSurface
+      {"version":"1.0","deleteSurface":{"surfaceId":"coffee_dashboard"}}
+after restock the frame kept its slider at: $4.10
+screenshot: screenshot.png
+close_surface -> deleteSurface: surface removed from the page

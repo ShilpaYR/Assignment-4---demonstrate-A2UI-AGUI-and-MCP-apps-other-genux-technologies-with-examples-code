@@ -1,0 +1,179 @@
+[
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 1,
+   "method": "ui/initialize",
+   "params": {
+    "appInfo": {
+     "name": "widget-host-view",
+     "version": "1.0.0"
+    },
+    "appCapabilities": {},
+    "protocolVersion": "2026-01-26"
+   }
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 1,
+   "result": {
+    "protocolVersion": "2026-01-26",
+    "hostInfo": {
+     "name": "genux-course-host",
+     "version": "1.0.0"
+    },
+    "hostCapabilities": {
+     "serverTools": {},
+     "updateModelContext": {
+      "text": {}
+     },
+     "message": {
+      "text": {}
+     }
+    },
+    "hostContext": {
+     "theme": "light",
+     "displayMode": "inline",
+     "toolInfo": {
+      "tool": {
+       "name": "generate_widget",
+       "description": "Generate an interactive widget (HTML) for a request the standard components cannot express.",
+       "inputSchema": {
+        "type": "object",
+        "properties": {
+         "request": {
+          "default": "Build an interactive break-even calculator for the coffee cart: sliders for price per cup, cost per cup and fixed weekly costs.",
+          "title": "Request",
+          "type": "string"
+         }
+        },
+        "title": "generate_widgetArguments"
+       },
+       "_meta": {
+        "ui": {
+         "resourceUri": "ui://coffee/widget-host.html",
+         "visibility": [
+          "model",
+          "app"
+         ]
+        }
+       }
+      }
+     },
+     "locale": "en-US"
+    }
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/initialized",
+   "params": {}
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/tool-input",
+   "params": {
+    "arguments": {
+     "request": "Build an interactive break-even calculator for the coffee cart."
+    }
+   }
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/tool-result",
+   "params": {
+    "_meta": {
+     "io.modelcontextprotocol/serverInfo": {
+      "name": "coffee-cart-open-ended",
+      "version": ""
+     }
+    },
+    "content": [
+     {
+      "type": "text",
+      "text": "Generated an interactive widget (873 tokens of HTML) for: Build an interactive break-even calculator for the coffee cart."
+     }
+    ],
+    "structuredContent": {
+     "title": "Break-even calculator",
+     "html": "<!doctype html>\n<html>\n<head>\n<style>\n  body { font: 14px/1.4 -apple-system, \"Segoe UI\", Roboto, sans-serif; margin: 0; padding: 12px; color: #1d1b16; }\n  h3 { margin: 0 0 8px; font-size: 15px; }\n  label { display: grid; grid-template-columns: 150px 1fr 70px; gap: 8px; align-items: center; margin: 6px 0; }\n  output { font-weight: 600; text-align: right; }\n  .result { margin-top: 10px; padding: 10px; border-radius: 8px; background: #f2e7dc; display: flex; gap: 18px; flex-wrap: wrap; }\n  .result b { font-size: 20px; display: block; }\n  .bar { height: 10px; background: #e3ded2; border-radius: 5px; margin-top: 8px; overflow: hidden; }\n  .bar > div { height: 100%; background: #2f7d4f; width: 0; transition: width .2s; }\n  button { margin-top: 10px; font: inherit; border: 0; border-radius: 6px; padding: 6px 12px; background: #7b4bb3; color: #fff; cursor: pointer; }\n</style>\n</head>\n<body>\n  <h3>Break-even calculator</h3>\n  <label>Price per cup <input id=\"price\" type=\"range\" min=\"2\" max=\"7\" step=\"0.05\" value=\"3.60\"><output id=\"priceOut\"></output></label>\n  <label>Cost per cup <input id=\"cost\" type=\"range\" min=\"0.5\" max=\"3\" step=\"0.05\" value=\"1.25\"><output id=\"costOut\"></output></label>\n  <label>Fixed weekly costs <input id=\"fixed\" type=\"range\" min=\"200\" max=\"2000\" step=\"10\" value=\"900\"><output id=\"fixedOut\"></output></label>\n  <div class=\"result\">\n    <div>Break-even cups / week<b id=\"cups\">-</b></div>\n    <div>Profit at 1,297 cups<b id=\"profit\">-</b></div>\n  </div>\n  <div class=\"bar\" title=\"this week's cups vs break-even\"><div id=\"progress\"></div></div>\n  <button id=\"apply\">Use this price</button>\n<script>\n  var SOLD = 1297;\n  function $(id) { return document.getElementById(id); }\n  function update() {\n    var p = +$(\"price\").value, c = +$(\"cost\").value, f = +$(\"fixed\").value;\n    $(\"priceOut\").textContent = \"$\" + p.toFixed(2);\n    $(\"costOut\").textContent = \"$\" + c.toFixed(2);\n    $(\"fixedOut\").textContent = \"$\" + f.toFixed(0);\n    var margin = p - c;\n    var cups = margin > 0 ? Math.ceil(f / margin) : Infinity;\n    $(\"cups\").textContent = isFinite(cups) ? cups.toLocaleString() : \"never\";\n    $(\"profit\").textContent = \"$\" + (SOLD * margin - f).toFixed(0);\n    $(\"progress\").style.width = isFinite(cups) ? Math.min(100, 100 * SOLD / cups) + \"%\" : \"0%\";\n  }\n  [\"price\", \"cost\", \"fixed\"].forEach(function (id) { $(id).addEventListener(\"input\", update); });\n  $(\"apply\").addEventListener(\"click\", function () {\n    genux.emit(\"apply_price\", { price: +$(\"price\").value, breakEvenCups: $(\"cups\").textContent });\n  });\n  update();\n</script>\n</body>\n</html>",
+     "allowedEvents": [
+      "apply_price"
+     ]
+    },
+    "isError": false,
+    "resultType": "complete"
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/size-changed",
+   "params": {
+    "width": 806,
+    "height": 412
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/size-changed",
+   "params": {
+    "width": 806,
+    "height": 375
+   }
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 2,
+   "method": "ui/update-model-context",
+   "params": {
+    "content": [
+     {
+      "type": "text",
+      "text": "The user picked a list price of $4.40 (break-even at 286 cups/week)."
+     }
+    ]
+   }
+  }
+ },
+ {
+  "dir": "host->view",
+  "msg": {
+   "jsonrpc": "2.0",
+   "id": 2,
+   "result": {}
+  }
+ },
+ {
+  "dir": "view->host",
+  "msg": {
+   "jsonrpc": "2.0",
+   "method": "ui/notifications/size-changed",
+   "params": {
+    "width": 806,
+    "height": 403
+   }
+  }
+ }
+]
